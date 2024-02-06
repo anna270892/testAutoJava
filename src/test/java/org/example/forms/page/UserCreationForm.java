@@ -98,7 +98,7 @@ public class UserCreationForm {
 
     //метод ожидания элемента
     public static String waitForElementAndGetText(WebDriver driver, By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return element.getText();
     }

@@ -289,4 +289,130 @@ public class UserCreationFormTest {
         String text = UserCreationForm.waitForElementAndGetText(driver, By.className("uk-margin"));
         Assertions.assertEquals("Данные добавлены.", text.trim());
     }
+
+    //пустое поле "email"
+    @Test
+    void creatingUserEmptyEmailFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("", "Анна-Людмила", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("emailFormatError"));
+        Assertions.assertEquals("Неверный формат E-Mail", text.trim());
+    }
+
+    //email без "@"
+    @Test
+    void creatingUserEmailFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akocherginaprotei.ru", "Анна", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("emailFormatError"));
+        Assertions.assertEquals("Неверный формат E-Mail", text.trim());
+    }
+
+    //email без доменной части
+    @Test
+    void creatingUserEmailWithoutDomainPartFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergina@", "Анна", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("emailFormatError"));
+        Assertions.assertEquals("Неверный формат E-Mail", text.trim());
+    }
+
+    //email без имени пользователя
+    @Test
+    void creatingUserEmailNoUsernameFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("@protei.ru", "Анна", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("emailFormatError"));
+        Assertions.assertEquals("Неверный формат E-Mail", text.trim());
+    }
+
+    //email без точки (БАГ)
+    @Test
+    void creatingUserEmailNoPointFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergina@proteiru", "Анна", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("emailFormatError"));
+        Assertions.assertEquals("Неверный формат E-Mail", text.trim());
+    }
+
+    //email рус.буквы
+    @Test
+    void creatingUserEmailRussianLettersFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("анна.протей.ру", "Анна", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("emailFormatError"));
+        Assertions.assertEquals("Неверный формат E-Mail", text.trim());
+    }
+
+    //email цифры
+    @Test
+    void creatingUserEmailNumbersFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("0000000000000000000000000000", "Анна", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("emailFormatError"));
+        Assertions.assertEquals("Неверный формат E-Mail", text.trim());
+    }
+
+    //email спецсимволы
+    @Test
+    void creatingUserEmailSpecialCharactersFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("$##$%^((#$##$%^((#", "Анна", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("emailFormatError"));
+        Assertions.assertEquals("Неверный формат E-Mail", text.trim());
+    }
+
+    //пустое поле "Имя"
+    @Test
+    void creatingUserEmptyNameFailed() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergina@protei.ru", "", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.id("blankNameError"));
+        Assertions.assertEquals("Поле имя не может быть пустым", text.trim());
+    }
 }

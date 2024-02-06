@@ -66,7 +66,7 @@ public class AuthorizationFormTest {
         Assertions.assertEquals("Неверный формат E-Mail", text.trim());
     }
 
-    //email без знака @
+    //email без "@"
     @Test
     void emailFailed() {
         LoginPage loginPage = new LoginPage(driver);
@@ -79,7 +79,7 @@ public class AuthorizationFormTest {
     @Test
     void emailWithoutDomainPartFailed() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("testprotei", "test");
+        loginPage.login("testprotei@", "test");
         String text = driver.findElement(By.id("emailFormatError")).getText();
         Assertions.assertEquals("Неверный формат E-Mail", text.trim());
     }
@@ -124,7 +124,7 @@ public class AuthorizationFormTest {
     @Test
     void emailSpecialCharactersFailed() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("$##$%^((#", "test");
+        loginPage.login("$##$%^((#$##$%^((#", "test");
         String text = driver.findElement(By.id("emailFormatError")).getText();
         Assertions.assertEquals("Неверный формат E-Mail", text.trim());
     }
