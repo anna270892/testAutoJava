@@ -31,6 +31,44 @@ public class UserCreationFormTest {
     }
 
 
+    //создание пользователя без указания выборов (Женский)
+    @Test
+    void creatingUserNoElectionsFemale() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergina@protei.ru", "Анна-Людмила", "Женский");
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.className("uk-margin"));
+        Assertions.assertEquals("Данные добавлены.", text.trim());
+    }
+
+    //создание пользователя с указанием одного выбора 1.1 (Женский)
+    @Test
+    void creatingUserOneChoiceOneOneFemale() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergina@protei.ru", "Анна-Людмила", "Женский");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.className("uk-margin"));
+        Assertions.assertEquals("Данные добавлены.", text.trim());
+    }
+
+    //создание пользователя с указанием одного выбора 2.1 (Женский)
+    @Test
+    void creatingUserOneChoiceTwoOneFemale() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergina@protei.ru", "Анна-Людмила", "Женский");
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.className("uk-margin"));
+        Assertions.assertEquals("Данные добавлены.", text.trim());
+    }
+
     //создание пользователя (Женский/вариант 1.1/вариант 2.1)
     @Test
     void creatingUserOptionOneOneOptionTwoOneFemale() {
@@ -160,6 +198,44 @@ public class UserCreationFormTest {
         Assertions.assertEquals("Данные добавлены.", text.trim());
     }
 
+
+    //создание пользователя без указания выборов (Мужской)
+    @Test
+    void creatingUserNoElectionsMale() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergin@protei.ru", "Андрей-Алексей", "Мужской");
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.className("uk-margin"));
+        Assertions.assertEquals("Данные добавлены.", text.trim());
+    }
+
+    //создание пользователя с указанием одного выбора 1.1 (Мужской)
+    @Test
+    void creatingUserOneChoiceOneOneMale() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergin@protei.ru", "Андрей-Алексей", "Мужской");
+        userCreationForm.clickOptionOneOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.className("uk-margin"));
+        Assertions.assertEquals("Данные добавлены.", text.trim());
+    }
+
+    //создание пользователя с указанием одного выбора 2.1 (Мужской)
+    @Test
+    void creatingUserOneChoiceTwoOneMale() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginValid();
+        UserCreationForm userCreationForm = new UserCreationForm(driver);
+        userCreationForm.addUser("akochergin@protei.ru", "Андрей-Алексей", "Мужской");
+        userCreationForm.clickOptionTwoOneElement();
+        userCreationForm.clickAddButton();
+        String text = UserCreationForm.waitForElementAndGetText(driver, By.className("uk-margin"));
+        Assertions.assertEquals("Данные добавлены.", text.trim());
+    }
 
     //создание пользователя (Мужской/вариант 1.1/вариант 2.1)
     @Test

@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class AuthorizationFormTest {
     private WebDriver driver;
 
+
     @BeforeEach
     void setUp() {
         WebDriverManager.chromedriver().setup();
