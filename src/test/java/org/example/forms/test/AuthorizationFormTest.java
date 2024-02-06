@@ -30,15 +30,16 @@ public class AuthorizationFormTest {
         driver = null;
     }
 
+
     //успешная авторизация
     @Test
     void validAuthorization() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("test@protei.ru", "test");
+        loginPage.loginValid();
         Assertions.assertTrue(driver.findElement(By.id("inputsPage")).isDisplayed());
     }
 
-    //авторизация не зарегестрированным пользователем
+    //авторизация не зарегистрированным пользователем
     @Test
     void invalidUserFailed() {
         LoginPage loginPage = new LoginPage(driver);

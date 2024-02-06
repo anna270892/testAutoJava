@@ -32,4 +32,11 @@ public class LoginPage {
         authButton.click();
     }
 
+    public void loginValid() {
+        String userEmail = "test@protei.ru";
+        String userPassword = "test";
+        email.sendKeys(userEmail);
+        password.sendKeys(userPassword);
+        authButton.click();
+    }
 }
